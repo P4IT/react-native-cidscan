@@ -1,0 +1,1 @@
+{"version":3,"sources":["index.tsx"],"names":["CIDScan","NativeModules"],"mappings":";;;;;;;AAAA;;AAEA,MAAM;AAAEA,EAAAA;AAAF,IAAcC,0BAApB;eAEeD,O","sourcesContent":["import { NativeModules } from 'react-native';\n\nconst { CIDScan } = NativeModules;\n\nexport default CIDScan;\n"]}
