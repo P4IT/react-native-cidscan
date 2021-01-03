@@ -17,7 +17,8 @@ Pod::Spec.new do |s|
   s.source_files = "ios/**/*.{h,m,mm,a,swift}"
   s.static_framework = true
 #  s.vendored_libraries = 'ios/CaptureIDLibrary.a', 'ios/libEnterpriseCortexDecoderLibrary.a'
-  s.vendored_frameworks = 'CaptureIDLibrary', 'libEnterpriseCortexDecoderLibrary'
+#  s.vendored_frameworks = 'CaptureIDLibrary', 'libEnterpriseCortexDecoderLibrary'
+  s.vendored_libraries = 'ios/EnterpriseCortexDecoderLibrary.a'
   s.ios.xcconfig = { "HEADER_SEARCH_PATHS" => "$(PODS_ROOT)/#{s.name}", "LIBRARY_SEARCH_PATHS" => "#{File.join(File.dirname(__FILE__), 'ios')}" }
 
   s.dependency "React-Core"
