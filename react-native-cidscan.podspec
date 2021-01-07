@@ -10,13 +10,13 @@ Pod::Spec.new do |s|
   s.license      = package["license"]
   s.authors      = package["author"]
 
-  s.platforms    = { :ios => "10.0" }
+  s.platforms    = { :ios => "9.0" }
   s.source       = { :git => "https://github.com/P4IT/react-native-cidscan.git", :tag => "#{s.version}" }
 
   
   s.source_files = "ios/**/*.{h,m,mm,a,swift}"
   s.static_framework = true
-  s.vendored_libraries = 'ios/CaptureIDLibrary.a'
+  s.vendored_libraries = 'ios/libCaptureIDLibrary.a'
   s.ios.xcconfig = { "HEADER_SEARCH_PATHS" => "$(PODS_ROOT)/#{s.name}, #{File.join(File.dirname(__FILE__), 'ios')}", "LIBRARY_SEARCH_PATHS" => "#{File.join(File.dirname(__FILE__), 'ios')}" }
 
   s.dependency "React-Core"
