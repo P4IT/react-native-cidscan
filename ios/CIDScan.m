@@ -31,7 +31,7 @@ RCT_EXPORT_METHOD(initCaptureID) {
     //self.previewView.backgroundColor = [UIColor clearColor];
     UIWindow *currentWindow = [UIApplication sharedApplication].keyWindow;
     [currentWindow addSubview:self.previewView];
-    self.CPID_decoder = [[CaptureIDLibrary alloc]initWithUIview:self.previewView resultBlock:NULL];
+      self.CPID_decoder = [[CaptureIDLibrary alloc]initWithUIview:self.previewView resultBlock:^(BOOL result){}];
     NSArray * result = [self.CPID_decoder getSdkVersion];
   });
 }
