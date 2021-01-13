@@ -17,7 +17,7 @@ public class CaptureIDPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(@Nonnull ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
-        modules.add(new CaptureIDHandler(reactContext));
+        modules.add(new CIDScan(reactContext));
         return modules;
     }
 
