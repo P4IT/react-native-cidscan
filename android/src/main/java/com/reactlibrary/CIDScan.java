@@ -44,8 +44,8 @@ import app.captureid.captureidlibrary.result.ResultListener;
 import app.captureid.captureidlibrary.result.ResultObject;
 
 
-public class CaptureIDHandler extends ReactContextBaseJavaModule {
-    private static final String TAG = CaptureIDHandler.class.getSimpleName();
+public class CIDScan extends ReactContextBaseJavaModule {
+    private static final String TAG = CIDScan.class.getSimpleName();
 
     private static final String DURATION_SHORT_KEY = "SHORT";
     private static final String DURATION_LONG_KEY = "LONG";
@@ -54,14 +54,14 @@ public class CaptureIDHandler extends ReactContextBaseJavaModule {
     private FrameLayout fl_cameraHostView;
     private Callback _licenseCallback;
 
-    public CaptureIDHandler(ReactApplicationContext reactContext) {
+    public CIDScan(ReactApplicationContext reactContext) {
         super(reactContext);
     }
 
     @Nonnull
     @Override
     public String getName() {
-        return "CaptureIDHandler";
+        return "CIDScan";
     }
 
     @Override
@@ -73,7 +73,7 @@ public class CaptureIDHandler extends ReactContextBaseJavaModule {
     }
 
     /**
-     * Return a [WritableNativeMap] from a [PluginResultObject - CaptureIDHandler]
+     * Return a [WritableNativeMap] from a [PluginResultObject - CIDScan]
      *
      * @param resultObject
      * @return
@@ -160,7 +160,7 @@ public class CaptureIDHandler extends ReactContextBaseJavaModule {
         }
     };
     /**
-     * init the CaptureIDHandler
+     * init the CIDScan
      */
     @ReactMethod
     public void initCaptureID() {
