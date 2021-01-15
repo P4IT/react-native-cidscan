@@ -53,6 +53,7 @@ public class CIDScan extends ReactContextBaseJavaModule {
     private CaptureID _captureid;
     private FrameLayout fl_cameraHostView;
     private Callback _licenseCallback;
+    private Callback _captureIDCallback;
 
     public CIDScan(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -163,10 +164,13 @@ public class CIDScan extends ReactContextBaseJavaModule {
      * init the CIDScan
      */
     @ReactMethod
-    public void initCaptureID() {
+    public void initCaptureID(Callback captureIDCallback) {
+        _captureIDCallback = captureIDCallback;
         Activity activity = getCurrentActivity();
         _captureid = CaptureID.getSharedLibrary(activity);
         _captureid.addListener(_captureid_listener);
+        ResultObject resultObject = new ResultObject("initCaptureID", true);
+        _captureIDCallback.invoke(null, getNativeArray(resultObject));
     }
 
     /**
@@ -738,12 +742,12 @@ public class CIDScan extends ReactContextBaseJavaModule {
 //    }
 
     @ReactMethod
-    public void setAimStyle(final int style) {
+    public void setAimStyle(final int style, final int red, final int green, final int blue) {
         Activity activity = getCurrentActivity();
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                _captureid.getCameraScanner().setAimStyle(style);
+                _captureid.getCameraScanner().setAimStyle(style, red, green, blue);
             }
         });
     }
