@@ -15,6 +15,7 @@ Pod::Spec.new do |s|
 
   
   s.source_files = "ios/**/*.{h,m,mm,a,swift}"
+  s.resources = "ios/*.{png}"
   s.static_framework = true
   s.vendored_libraries = 'ios/libCaptureIDLibrary.a'
   s.ios.xcconfig = { "HEADER_SEARCH_PATHS" => "$(PODS_ROOT)/#{s.name}, #{File.join(File.dirname(__FILE__), 'ios')}", "LIBRARY_SEARCH_PATHS" => "#{File.join(File.dirname(__FILE__), 'ios')}" }
