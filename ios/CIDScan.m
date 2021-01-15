@@ -16,7 +16,7 @@ RCT_EXPORT_MODULE()
 }
 
 //public void initCaptureID()
-RCT_EXPORT_METHOD(initCaptureID) {
+RCT_EXPORT_METHOD(initCaptureID:(RCTResponseSenderBlock)callback) {
   NSLog(@"initCaptureID");
   // get display size
   CGFloat width = [UIScreen mainScreen].bounds.size.width;
@@ -33,6 +33,8 @@ RCT_EXPORT_METHOD(initCaptureID) {
     [currentWindow addSubview:self.previewView];
       self.CPID_decoder = [[CaptureIDLibrary alloc]initWithUIview:self.previewView resultBlock:^(BOOL result){}];
     NSArray * result = [self.CPID_decoder getSdkVersion];
+    if(callback != nil)
+        callback(@[[NSNull null], result]);
   });
 }
 
@@ -385,8 +387,11 @@ RCT_EXPORT_METHOD(startDecoder) {
 
 //public void stopCameraPreview()
 RCT_EXPORT_METHOD(stopCameraPreview) {
-  [self.CPID_decoder stopCameraPreview];
-  self.previewView.alpha = 1.0f;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.CPID_decoder stopDecoding];
+        [self.CPID_decoder stopCameraPreview];
+        self.previewView.alpha = 0.0f;
+    });
 }
 
 //public void stopDecoding()
