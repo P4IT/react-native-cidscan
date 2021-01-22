@@ -5,14 +5,30 @@
 
 RCT_EXPORT_MODULE()
 
+-(instancetype)init {
+    if(self = [super init]) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(decoderEventReceived) name:@"decoderNotification" object:nil];
+    }
+    return self;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"decoderNotification" object:nil];
+}
+
 - (NSArray<NSString *> *)supportedEvents {
   return @[@"decoderEvent"];
 }
 
 // Send a result object to JavaScript, the event is called "decoderEvent".
 // to get the value from the decoder, the customer need to add a listener.
-- (void)barcodeEventReceived:(NSArray *) result {
-   [self sendEventWithName:@"decoderEvent" body:@{@"result": result}];
+- (void)decoderEventReceived:(NSArray *)result {
+    [self sendEventWithName:@"decoderEvent" body:@{@"result": result}];
+}
+
++ (BOOL)requiresMainQueueSetup
+{
+  return NO;
 }
 
 //public void initCaptureID()
@@ -380,7 +396,7 @@ RCT_EXPORT_METHOD(startCameraPreview:(RCTResponseSenderBlock)callback) {
 RCT_EXPORT_METHOD(startDecoder) {
   dispatch_async(dispatch_get_main_queue(), ^{
     [self.CPID_decoder startDecoder:^(NSArray * _Nonnull result) {
-      [self barcodeEventReceived:result];
+      [self decoderEventReceived:result];
     }];
   });
 }
