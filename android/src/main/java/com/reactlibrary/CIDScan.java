@@ -762,6 +762,17 @@ public class CIDScan extends ReactContextBaseJavaModule {
         _captureid.getCameraScanner().ar_showVisualizeBarcodes(enable);
     }
 
+        /**
+     * Enable or disable a symbology
+     *
+     * @param symbologyName [String]
+     * @param enable [Boolean]
+     */
+    @ReactMethod
+    public void enableABarcode(String symbologyName, Boolean enable) {
+        setSymbologyProperties(symbologyName, enable);
+    }
+
     /**
      * Enable or disable all symbologies
      *
