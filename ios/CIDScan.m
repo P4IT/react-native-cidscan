@@ -316,6 +316,10 @@ RCT_EXPORT_METHOD(setCameraType:(NSString *)value) {
   [self.CPID_decoder setCameraType:value];
 }
 
+RCT_EXPORT_METHOD(setContinuousMode:(BOOL) enable) {
+  [self.CPID_decoder setContinuousMode:enable];
+}
+
 //public void setCameraZoom(boolean enable, float zoom)
 RCT_EXPORT_METHOD(setCameraZoom:(BOOL)value zommValue:(NSNumber *)zoom) {
   [self.CPID_decoder setCameraZoom:value cameraZoom:zoom];
