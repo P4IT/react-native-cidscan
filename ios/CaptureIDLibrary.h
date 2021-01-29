@@ -14,7 +14,7 @@
 @property (nonatomic, strong)UIView * _Nonnull rootView;
 
 //-(_Nonnull instancetype)initWithUIview:(UIView * _Nonnull)rootView;
--(instancetype _Nonnull )initWithUIview:(UIView*_Nullable)rootView resultBlock:(void (^ _Nullable)(BOOL result))resultBlock;
+-(instancetype)initWithUIview:(UIView*)rootView resultBlock:(void (^ _Nonnull)(BOOL result))resultBlock;
 
 #pragma mark - License
 
@@ -43,6 +43,13 @@
  @param resultHandler (void (^)(NSArray *result))  We need a callback function, because the activateLicense is a async function
  */
 -(void) activateEDKLicenseWithKey:(NSString * _Nonnull)edkKey customerID:(NSString * _Nonnull)customerID resultHandler:(nonnull void (^)(NSArray * _Nonnull result))resultHandler;
+
+/*!
+ @discussion Set ButtonBar backgroung color.
+ @param color NSString  the requested color
+function
+ */
+-(void) setButtonBarColor:(NSString * _Nonnull)color;
 
 /*!
  @discussion Check the camera permission
@@ -97,7 +104,14 @@
  @return NSArray PluginResultObject
  todo keepcallback = yes
  */
--(NSArray * _Nonnull)startCameraPreview:(nonnull void (^)(NSArray * _Nullable result))resulthandler;
+-(NSArray * _Nonnull)startCameraPreview:(nonnull void (^)(NSArray * _Nonnull result))resulthandler;
+
+/**
+ @discussion StartSplitOverlay
+ @return NSArray PluginResultObject
+ todo keepcallback = yes
+ */
+-(NSArray * _Nonnull)startSplitOverlay:(nonnull void (^)(NSArray * _Nonnull result))resulthandler;
 
 /**
  @discussion Start Decoder KeepCallback = Yes
@@ -382,6 +396,12 @@
  @return NSArray PluginResultObject
  */
 -(NSArray * _Nonnull) enableAugmentedReality:(BOOL)enable;
+
+/**
+ @discussion  set continuousMode
+ @param enable BOOL
+ */
+-(void)setContinuousMode:(BOOL)enable;
 
 /**
  @discussion  set continuousScanning = enable and displayBarcodeOverlay = enable
