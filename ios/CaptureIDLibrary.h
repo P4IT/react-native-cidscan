@@ -208,6 +208,14 @@
 -(NSArray * _Nonnull) getLicensedSymbologies;
 
 /**
+ @discussion Enable/Disable a symbologiy.
+ @param symbologyName NSString
+ @param enable BOOL
+ @return NSArray PluginResultObject
+ */
+-(NSArray * _Nonnull) enableDecoder:(NSString * _Nonnull)symbologyName enable:(BOOL)enable;
+
+/**
  @discussion Enable all symbologies or disable all symbologies.
  @param enable BOOL
  @return NSArray PluginResultObject

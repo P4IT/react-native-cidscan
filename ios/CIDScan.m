@@ -493,4 +493,8 @@ RCT_EXPORT_METHOD(enableAllBarcodes:(BOOL)enable) {
   [self.CPID_decoder enableAllDecoders:enable];
 }
 
+RCT_EXPORT_METHOD(enableBarcode:(NSString *)symbologyName enable:(Boolean)enable) {
+    [self.CPID_decoder enableDecoder:symbologyName enable:enable];
+}
+
 @end
