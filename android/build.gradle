@@ -33,8 +33,9 @@ repositories {
 }
 
 dependencies {
+    implementation fileTree("libs") {include "*.aar"}
     implementation 'com.facebook.react:react-native:+'
-    implementation (name:'CaptureIDLibrary', ext:'aar')
-    implementation (name:'CortexDecoderLibrary', ext:'aar')
+//    implementation (name:'CaptureIDLibrary', ext:'aar')
+//    implementation (name:'CortexDecoderLibrary', ext:'aar')
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 }
