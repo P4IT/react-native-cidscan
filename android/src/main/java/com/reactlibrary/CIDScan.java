@@ -1,9 +1,11 @@
 package com.reactlibrary;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -24,6 +26,7 @@ import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
+import com.facebook.react.uimanager.UIManagerModule;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,6 +42,7 @@ import java.util.Map;
 
 import javax.annotation.Nonnull;
 
+import app.captureid.captureidlibrary.BoundedLayout;
 import app.captureid.captureidlibrary.CaptureID;
 import app.captureid.captureidlibrary.result.ResultListener;
 import app.captureid.captureidlibrary.result.ResultObject;
@@ -153,7 +157,7 @@ public class CIDScan extends ReactContextBaseJavaModule {
     private ResultListener _captureid_listener = new ResultListener() {
         @Override
         public void onResult(ResultObject resultObject) {
-            if(resultObject.getFunctoinName().equalsIgnoreCase("onActivationResult")) {
+            if(resultObject.getFunctionName().equalsIgnoreCase("onActivationResult")) {
                 _licenseCallback.invoke(null, getNativeArray(resultObject));
             } else {
                 Log.d(TAG, "result");
@@ -569,9 +573,41 @@ public class CIDScan extends ReactContextBaseJavaModule {
         _captureid.getCameraScanner().getDecoder().setWhiteBalance(enable, balance);
     }
 
+    @ReactMethod
+    public void startCameraPreviewWithOverlay(final Callback callback) {
+        final View view = getCurrentActivity().getWindow().getDecorView();
+        getCurrentActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    _captureid.getCameraScanner().startFullScreen((ViewGroup)view, new ResultListener() {
+                        @Override
+                        public void onResult(ResultObject resultObject) {
+                            if (resultObject.getFunctionName().equals("startCameraPreview")) {
+                                callback.invoke(null, "Success");
+                            } else {
+                                WritableMap result = new WritableNativeMap();
+                                try {
+                                    result.putArray("result", jsonToReactArray(resultObject.toJSON()));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                // send the result back to javaScript. The function inside of javascript needs to be called : "decoderEvent"!
+                                sendDecoderEvent(getReactApplicationContext(), "decoderEvent", result);
+                            }
+                        }
+                    });
+                } catch (Exception ex) {
+                    callback.invoke(ex.getMessage(), null);
+                }
+            }
+        });
+    }
+
     /**
      * Show the camera and build the fl_cameraHostView
      */
+    @SuppressLint("ResourceType")
     @ReactMethod
     public void startCameraPreview(final Callback callback) {
         final Activity activity = getCurrentActivity();
@@ -585,7 +621,18 @@ public class CIDScan extends ReactContextBaseJavaModule {
                     _captureid.getCameraScanner().startFullScreen(new ResultListener() {
                         @Override
                         public void onResult(ResultObject resultObject) {
-                            callback.invoke(null, "Success");
+                            if (resultObject.getFunctionName().equals("startCameraPreview")) {
+                                callback.invoke(null, "Success");
+                            } else {
+                                WritableMap result = new WritableNativeMap();
+                                try {
+                                    result.putArray("result", jsonToReactArray(resultObject.toJSON()));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                // send the result back to javaScript. The function inside of javascript needs to be called : "decoderEvent"!
+                                sendDecoderEvent(getReactApplicationContext(), "decoderEvent", result);
+                            }
                         }
                     });
                 } catch (Exception ex) {
@@ -661,13 +708,23 @@ public class CIDScan extends ReactContextBaseJavaModule {
      */
     @ReactMethod
     public void stopCameraPreview() {
-        Activity activity = getCurrentActivity();
-        activity.runOnUiThread(new Runnable() {
+        final View view = getCurrentActivity().getWindow().getDecorView();
+        getCurrentActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    ((ViewGroup) fl_cameraHostView.getParent()).removeView(fl_cameraHostView);
-                    _captureid.getCameraScanner().stopCameraPreview();
+                    for(int i = 0; i < ((ViewGroup)view).getChildCount(); i++) {
+                        View child = ((ViewGroup)view).getChildAt(i);
+                        if(child instanceof BoundedLayout) {
+                            ((ViewGroup)view).removeView(child);
+                            _captureid.getCameraScanner().stopCameraPreview();
+                            return;
+                        }
+                    }
+                    if(fl_cameraHostView != null) {
+                        ((ViewGroup) fl_cameraHostView.getParent()).removeView(fl_cameraHostView);
+                        _captureid.getCameraScanner().stopCameraPreview();
+                    }
                 } catch(Exception ex) {
                     Log.d(TAG, ex.getMessage());
                 }
