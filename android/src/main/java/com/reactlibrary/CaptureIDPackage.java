@@ -24,6 +24,8 @@ public class CaptureIDPackage implements ReactPackage {
     @Nonnull
     @Override
     public List<ViewManager> createViewManagers(@Nonnull ReactApplicationContext reactContext) {
-        return Collections.emptyList();
+        return Collections.<ViewManager>singletonList(
+                new CIDScanView()
+        );
     }
 }

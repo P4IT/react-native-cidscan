@@ -27,6 +27,7 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.facebook.react.uimanager.UIManagerModule;
+import com.facebook.react.uimanager.util.ReactFindViewUtil;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -574,13 +575,16 @@ public class CIDScan extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void startCameraPreviewWithOverlay(final Callback callback) {
-        final View view = getCurrentActivity().getWindow().getDecorView();
+    public void startCameraPreviewWithOverlay(final String viewid, final Callback callback) {
+        final View rootview = getCurrentActivity().getWindow().getDecorView().getRootView();
         getCurrentActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    _captureid.getCameraScanner().startFullScreen((ViewGroup)view, new ResultListener() {
+                    View requiredView = ReactFindViewUtil.findView(rootview, viewid);
+                    final FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                    requiredView.setLayoutParams(params);
+                    _captureid.getCameraScanner().startFullScreen((ViewGroup) requiredView, new ResultListener() {
                         @Override
                         public void onResult(ResultObject resultObject) {
                             if (resultObject.getFunctionName().equals("startCameraPreview")) {
@@ -819,7 +823,7 @@ public class CIDScan extends ReactContextBaseJavaModule {
         _captureid.getCameraScanner().ar_showVisualizeBarcodes(enable);
     }
 
-        /**
+    /**
      * Enable or disable a symbology
      *
      * @param symbologyName [String]
