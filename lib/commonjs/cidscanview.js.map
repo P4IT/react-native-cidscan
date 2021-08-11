@@ -1,0 +1,1 @@
+{"version":3,"sources":["cidscanview.js"],"names":["module","exports"],"mappings":";;AAAA;;AACAA,MAAM,CAACC,OAAP,GAAiB,yCAAuB,aAAvB,CAAjB","sourcesContent":["import { requireNativeComponent } from 'react-native';\nmodule.exports = requireNativeComponent('CIDScanView');"]}
