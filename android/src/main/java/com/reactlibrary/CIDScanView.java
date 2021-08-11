@@ -45,7 +45,7 @@ public class CIDScanView extends ViewGroupManager<ConstraintLayout> {
     public void onDropViewInstance(@NonNull ConstraintLayout view) {
         for(int i = 0; i < view.getChildCount(); i++) {
             if(view.getChildAt(i) instanceof BoundedLayout) {
-                ((BoundedLayout) view.getChildAt(0)).removeAllViews();
+                ((BoundedLayout) view.getChildAt(i)).removeAllViews();
             }
         }
         view.removeAllViews();
