@@ -67,8 +67,8 @@ public class CIDScanView extends ViewGroupManager<ConstraintLayout> {
         }
     }
 
-    @ReactProp(name="config")
-    public void setConfig(CIDScanView scanView, JSONObject config) {
-        scanView.setConfiguration(config);
-    }
+    // @ReactProp(name="config")
+    // public void setConfig(CIDScanView scanView, JSONObject config) {
+    //     scanView.setConfiguration(config);
+    // }
 }
