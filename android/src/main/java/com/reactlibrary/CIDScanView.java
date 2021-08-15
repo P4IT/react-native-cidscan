@@ -68,7 +68,7 @@ public class CIDScanView extends ViewGroupManager<ConstraintLayout> {
     }
 
     @ReactProp(name="config")
-    public void setVideoPath(CIDScanView scanView, JSONObject config) {
+    public void setConfig(CIDScanView scanView, JSONObject config) {
         scanView.setConfiguration(config);
     }
 }
