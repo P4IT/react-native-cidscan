@@ -27,6 +27,10 @@
 		B3458342259945B70051F09C /* CIDScan.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIDScan.h; sourceTree = "<group>"; };
 		B34583792599E7E60051F09C /* CaptureIDLibrary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CaptureIDLibrary.h; sourceTree = "<group>"; };
 		B345837D2599E84E0051F09C /* CaptureIDLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = CaptureIDLibrary.a; sourceTree = "<group>"; };
+		B39F9B1C26C8486800E7AEBC /* CIDScanViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIDScanViewManager.h; sourceTree = "<group>"; };
+		B39F9B1D26C8489B00E7AEBC /* CIDScanViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIDScanViewManager.m; sourceTree = "<group>"; };
+		B39F9B1E26C84B6800E7AEBC /* CIDScanView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CIDScanView.m; sourceTree = "<group>"; };
+		B39F9B1F26C84B7D00E7AEBC /* CIDScanView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIDScanView.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* CIDScan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CIDScan.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -53,6 +57,10 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				B39F9B1F26C84B7D00E7AEBC /* CIDScanView.h */,
+				B39F9B1E26C84B6800E7AEBC /* CIDScanView.m */,
+				B39F9B1D26C8489B00E7AEBC /* CIDScanViewManager.m */,
+				B39F9B1C26C8486800E7AEBC /* CIDScanViewManager.h */,
 				B34583792599E7E60051F09C /* CaptureIDLibrary.h */,
 				B3458342259945B70051F09C /* CIDScan.h */,
 				B3E7B5891CC2AC0600A0062D /* CIDScan.m */,

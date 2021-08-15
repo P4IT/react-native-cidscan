@@ -7,3 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CIDScanView.h"
+
+@implementation CIDScanView {
+    SimpleScanner *_scanner;
+}
+
+-(instancetype)init {
+    self = [super init];
+}
+
+@end
+

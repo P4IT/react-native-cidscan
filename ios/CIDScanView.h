@@ -8,6 +8,9 @@
 
 #ifndef CIDScanView_h
 #define CIDScanView_h
+@import CIDScanView
 
+@interface CIDScanView : RCTView
+@end
 
 #endif /* CIDScanView_h */

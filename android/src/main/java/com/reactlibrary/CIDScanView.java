@@ -10,6 +10,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.ViewGroupManager;
+import com.facebook.react.uimanager.annotations.ReactProp;
+
+import org.json.JSONObject;
 
 import app.captureid.captureidlibrary.BoundedLayout;
 import app.captureid.captureidlibrary.CaptureID;
@@ -21,6 +24,7 @@ public class CIDScanView extends ViewGroupManager<ConstraintLayout> {
     private static final String REACT_CLASS = "CIDScanView";
 
     private CaptureID _captureID;
+    private SimpleScanner _scanner;
 
     @NonNull
     @Override
@@ -33,7 +37,7 @@ public class CIDScanView extends ViewGroupManager<ConstraintLayout> {
     protected ConstraintLayout createViewInstance(@NonNull ThemedReactContext reactContext) {
         ConstraintLayout layout = new ConstraintLayout(reactContext);
         layout.setLayoutParams(new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_CONSTRAINT, ConstraintLayout.LayoutParams.MATCH_CONSTRAINT));
-        SimpleScanner _scanner = SimpleScanner.getSharedObject(reactContext);
+        _scanner = SimpleScanner.getSharedObject(reactContext);
         Point displaySize = new Point(0,0);
         reactContext.getCurrentActivity().getWindowManager().getDefaultDisplay().getSize(displaySize);
         _scanner.setDisplaySize(displaySize);
@@ -55,5 +59,16 @@ public class CIDScanView extends ViewGroupManager<ConstraintLayout> {
     @Override
     protected void finalize() throws Throwable {
         super.finalize();
+    }
+
+    protected void setConfiguration(JSONObject config) {
+        if(_scanner != null) {
+            _scanner.setConfiguration(config);
+        }
+    }
+
+    @ReactProp(name=”config”)
+    public void setVideoPath(CIDScanView scanView, JSONObject config) {
+        scanView.setConfiguration(config);
     }
 }
