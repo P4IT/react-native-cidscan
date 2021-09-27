@@ -1,21 +1,16 @@
-//
-//  CIDScanView.m
-//  Cidscan
-//
-//  Created by Uwe Hoppe on 14.08.21.
-//  Copyright © 2021 Facebook. All rights reserved.
-//
-
-#import <Foundation/Foundation.h>
+#import "React/RCTViewManager.h"
 #import "CIDScanView.h"
 
-@implementation CIDScanView {
-    SimpleScanner *_scanner;
-}
-
--(instancetype)init {
-    self = [super init];
-}
-
+@interface RNCIDScanView: RCTViewManager
 @end
 
+@implementation RNCIDScanView
+
+RCT_EXPORT_MODULE()
+
+-(UIView *)view {
+    CIDScanView * scview = [CIDScanView getSharedObject: [[UIScreen mainScreen] bounds]];
+    [scview startScanner];
+    return scview;
+}
+@end

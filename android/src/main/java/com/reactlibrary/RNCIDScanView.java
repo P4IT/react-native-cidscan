@@ -20,11 +20,15 @@ import app.captureid.captureidlibrary.SimpleScanner;
 import app.captureid.captureidlibrary.result.ResultListener;
 import app.captureid.captureidlibrary.result.ResultObject;
 
-public class CIDScanView extends ViewGroupManager<ConstraintLayout> {
-    private static final String REACT_CLASS = "CIDScanView";
+public class RNCIDScanView extends ViewGroupManager<ConstraintLayout> {
+    private static final String REACT_CLASS = "RNCIDScanView";
 
     private CaptureID _captureID;
     private SimpleScanner _scanner;
+
+    public RNCIDScanView() {
+        super();
+    }
 
     @NonNull
     @Override
@@ -67,8 +71,8 @@ public class CIDScanView extends ViewGroupManager<ConstraintLayout> {
         }
     }
 
-    // @ReactProp(name="config")
-    // public void setConfig(CIDScanView scanView, JSONObject config) {
-    //     scanView.setConfiguration(config);
-    // }
+//    @ReactProp(name="config")
+//    public void setConfig(CIDScanView scanView, JSONObject config) {
+//        scanView.setConfiguration(config);
+//    }
 }
