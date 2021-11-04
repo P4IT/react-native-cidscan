@@ -29,13 +29,17 @@ android {
 }
 
 repositories {
+    mavenLocal()
+    maven {
+        url("$rootDir/../node_modules/react-native-cidscan/android")
+    }
     mavenCentral()
 }
 
 dependencies {
-    implementation fileTree("libs") {include "*.aar"}
+    implementation fileTree("libs") {include "*.jar"}
     implementation 'com.facebook.react:react-native:+'
-//    implementation (name:'CaptureIDLibrary', ext:'aar')
-//    implementation (name:'CortexDecoderLibrary', ext:'aar')
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'com.codecorp:cortexdecoderlibrary:1.0.0'
+    implementation 'app.captureid:captureidlibrary:1.0.0'
 }
