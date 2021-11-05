@@ -57,6 +57,7 @@ public class RNCIDScanView extends ViewGroupManager<ConstraintLayout> {
             }
         }
         view.removeAllViews();
+        _scanner.closeSharedObject();
         super.onDropViewInstance(view);
     }
 
@@ -64,6 +65,7 @@ public class RNCIDScanView extends ViewGroupManager<ConstraintLayout> {
     protected void finalize() throws Throwable {
         super.finalize();
     }
+
 
     protected void setConfiguration(JSONObject config) {
         if(_scanner != null) {

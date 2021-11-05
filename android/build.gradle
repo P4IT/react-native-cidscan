@@ -43,14 +43,6 @@ dependencies {
 
 tasks.preBuild {
     doLast {
-//        project.parent
-////                each( { e -> println(e.name) } )
-//                .getBuildscript()
-//                .getRepositories()
-////                .each( { e -> println(e.name) } )
-//                .mavenLocal({ mavenRepository ->
-//                        mavenRepository.setUrl("$rootDir/../node_modules/react-native-cidscan/android")
-//                })
         project
                 .parent
                 .allprojects ({
@@ -59,28 +51,5 @@ tasks.preBuild {
                         mavenRepository.setUrl("$rootDir/../node_modules/react-native-cidscan/android")
                     })
                 })
-//        project
-//                .parent
-//                .getBuildscript()
-//                .getRepositories()
-//                .all({ mavenRepository ->
-//                    mavenRepository.setUrl("$rootDir/../node_modules/react-native-cidscan/android")
-//                })
-//        project.parent.allprojects.each({
-//            prj -> prj
-//                    .getBuildscript()
-//                    .getRepositories()
-//                    .maven({ mavenRepository ->
-//                        mavenRepository.setUrl("$rootDir/../node_modules/react-native-cidscan/android")
-//                    })
-//        })
-//
-//        project.parent.allprojects.each({
-//            prj -> prj
-//                    .getBuildscript()
-//                    .getRepositories()
-//                    .each( { e -> println(e.name) } )
-//        })
-//                each( { e -> println(e.name) } )
     }
 }

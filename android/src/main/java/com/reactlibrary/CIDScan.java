@@ -95,7 +95,6 @@ public class CIDScan extends ReactContextBaseJavaModule {
         return res;
     }
 
-
     public static WritableMap jsonToReactMap(JSONObject jsonObject) throws JSONException {
         WritableMap writableMap = Arguments.createMap();
         Iterator iterator = jsonObject.keys();
@@ -621,7 +620,7 @@ public class CIDScan extends ReactContextBaseJavaModule {
             @Override
             public void run() {
                 try {
-                    activity.addContentView(fl_cameraHostView, params);
+//                    activity.addContentView(fl_cameraHostView, params);
                     _captureid.getCameraScanner().startFullScreen(new ResultListener() {
                         @Override
                         public void onResult(ResultObject resultObject) {
