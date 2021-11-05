@@ -1,4 +1,3 @@
-
 buildscript {
     repositories {
         jcenter()
@@ -33,13 +32,55 @@ repositories {
     maven {
         url("$rootDir/../node_modules/react-native-cidscan/android")
     }
-    mavenCentral()
 }
-
 dependencies {
     implementation fileTree("libs") {include "*.jar"}
     implementation 'com.facebook.react:react-native:+'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'com.codecorp:cortexdecoderlibrary:1.0.0'
     implementation 'app.captureid:captureidlibrary:1.0.0'
+}
+
+tasks.preBuild {
+    doLast {
+//        project.parent
+////                each( { e -> println(e.name) } )
+//                .getBuildscript()
+//                .getRepositories()
+////                .each( { e -> println(e.name) } )
+//                .mavenLocal({ mavenRepository ->
+//                        mavenRepository.setUrl("$rootDir/../node_modules/react-native-cidscan/android")
+//                })
+        project
+                .parent
+                .allprojects ({
+                    getRepositories()
+                    .mavenLocal({mavenRepository ->
+                        mavenRepository.setUrl("$rootDir/../node_modules/react-native-cidscan/android")
+                    })
+                })
+//        project
+//                .parent
+//                .getBuildscript()
+//                .getRepositories()
+//                .all({ mavenRepository ->
+//                    mavenRepository.setUrl("$rootDir/../node_modules/react-native-cidscan/android")
+//                })
+//        project.parent.allprojects.each({
+//            prj -> prj
+//                    .getBuildscript()
+//                    .getRepositories()
+//                    .maven({ mavenRepository ->
+//                        mavenRepository.setUrl("$rootDir/../node_modules/react-native-cidscan/android")
+//                    })
+//        })
+//
+//        project.parent.allprojects.each({
+//            prj -> prj
+//                    .getBuildscript()
+//                    .getRepositories()
+//                    .each( { e -> println(e.name) } )
+//        })
+//                each( { e -> println(e.name) } )
+    }
 }
