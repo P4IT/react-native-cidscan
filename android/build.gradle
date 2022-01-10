@@ -41,15 +41,13 @@ dependencies {
     implementation 'app.captureid:captureidlibrary:1.0.0'
 }
 
-tasks.preBuild {
-    doLast {
-        project
-                .parent
-                .allprojects ({
-                    getRepositories()
-                    .mavenLocal({mavenRepository ->
-                        mavenRepository.setUrl("$rootDir/../node_modules/react-native-cidscan/android")
-                    })
+tasks.configure {
+    project
+        .parent
+        .allprojects ({
+            getRepositories()
+                .mavenLocal({mavenRepository ->
+                    mavenRepository.setUrl("$rootDir/../node_modules/react-native-cidscan/android")
                 })
-    }
+        })
 }
