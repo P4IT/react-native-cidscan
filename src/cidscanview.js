@@ -5,6 +5,7 @@ var viewProps = {
   name: 'RNCIDScanView',
   propTypes: {
     config: PropTypes.object,
+    onPreviewReady: PropTypes.func,
     ...ViewPropTypes,
   },
 };
