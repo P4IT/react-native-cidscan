@@ -40,7 +40,7 @@ public class CIDScanPreview extends ConstraintLayout {
             ReactContext reactContext = (ReactContext)getContext();
             reactContext
                     .getJSModule(RCTEventEmitter.class)
-                    .receiveEvent(getId(), "topPreviewReady", null);
+                    .receiveEvent(getId(), "onPreviewReady", null);
         }
     };
 

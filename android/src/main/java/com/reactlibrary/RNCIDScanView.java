@@ -74,7 +74,7 @@ public class RNCIDScanView extends ViewGroupManager<CIDScanPreview> {
     @Nullable
     @Override
     public Map<String, Object> getExportedCustomDirectEventTypeConstants() {
-        return MapBuilder.of("topPreviewReady", (Object)MapBuilder.of(
+        return MapBuilder.of("onPreviewReady", (Object)MapBuilder.of(
                         "registrationName", "onPreviewReady"));
     }
 
