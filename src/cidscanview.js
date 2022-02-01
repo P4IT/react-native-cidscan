@@ -1,13 +1,32 @@
 import PropTypes from 'prop-types';
-import { requireNativeComponent, ViewPropTypes } from 'react-native';
+import { Component } from 'react';
+import { requireNativeComponent, View, ViewPropTypes } from 'react-native';
 
-var viewProps = {
-  name: 'RNCIDScanView',
-  propTypes: {
-    config: PropTypes.object,
-    onPreviewReady: PropTypes.func,
-    ...ViewPropTypes,
-  },
-};
+class CIDScanView extends Component {
+  
+  constructor(props) {
+    super(props);
+    this.onPreviewReady = this._onPreviewReady.onPreviewReady.bind(this);
+  }
 
-module.exports = requireNativeComponent('RNCIDScanView', viewProps);
+  _onPreviewReady(event) {
+    if(!this.props.onPreviewReady) {
+      return;
+    }
+    console.log('_onPreviewReady');
+    this.props.onPreviewReady(event.nativeEvent);
+  }
+
+  render() {
+    return <RNCIDScanView onPreviewReady={this.onPreviewReady}/>
+  }
+}
+
+CIDScanView.propTypes = {
+  ...View.propTypes,
+  onPreviewReady: PropTypes.func
+}
+
+
+const RNCIDScanView = requireNativeComponent('RNCIDScanView');
+module.exports = RNCIDScanView;
