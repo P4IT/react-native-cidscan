@@ -5,9 +5,15 @@
 
 RCT_EXPORT_MODULE()
 
+// Send a result object to JavaScript, the event is called "decoderEvent".
+// to get the value from the decoder, the customer need to add a listener.
+- (void)decoderEventReceived:(NSArray *)result {
+    [self sendEventWithName:@"decoderEvent" body:@{@"result": result}];
+}
+
 -(instancetype)init {
     if(self = [super init]) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(decoderEventReceived) name:@"decoderNotification" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(decoderEventReceived:) name:@"decoderNotification" object:nil];
     }
     return self;
 }
@@ -18,12 +24,6 @@ RCT_EXPORT_MODULE()
 
 - (NSArray<NSString *> *)supportedEvents {
   return @[@"decoderEvent"];
-}
-
-// Send a result object to JavaScript, the event is called "decoderEvent".
-// to get the value from the decoder, the customer need to add a listener.
-- (void)decoderEventReceived:(NSArray *)result {
-    [self sendEventWithName:@"decoderEvent" body:@{@"result": result}];
 }
 
 + (BOOL)requiresMainQueueSetup
@@ -164,13 +164,13 @@ RCT_EXPORT_METHOD(generateDeviceID:(RCTResponseSenderBlock)callback) {
 
 //public void getCameraPreview()
 RCT_EXPORT_METHOD(getCameraPreview) {
-  NSArray *result = [self.CPID_decoder getCameraPreview];
+  [self.CPID_decoder getCameraPreview];
   NSLog(@"getCameraPreview function not supported");
 }
 
 //public void getDecoderVal()
 RCT_EXPORT_METHOD(getDecoderVal) {
-  NSArray *result = [self.CPID_decoder getDecodeVal];
+  [self.CPID_decoder getDecodeVal];
   NSLog(@"getDecoderVal function not supported");
 }
 
@@ -287,22 +287,22 @@ RCT_EXPORT_METHOD(playBeepSound) {
 }
 
 //public void regionOfInterestHeight(int value)
-RCT_EXPORT_METHOD(regionOfInterestHeight:(nonnull NSNumber *)value) {
+RCT_EXPORT_METHOD(regionOfInterestHeight:(NSNumber *)value) {
   [self.CPID_decoder regionOfInterestHeight:value.intValue];
 }
 
 //public void regionOfInterestLeft(int value)
-RCT_EXPORT_METHOD(regionOfInterestLeft:(nonnull NSNumber *)value) {
+RCT_EXPORT_METHOD(regionOfInterestLeft:(NSNumber *)value) {
   [self.CPID_decoder regionOfInterestLeft:value.intValue];
 }
 
 //public void regionOfInterestTop(int value)
-RCT_EXPORT_METHOD(regionOfInterestTop:(nonnull NSNumber *)value) {
+RCT_EXPORT_METHOD(regionOfInterestTop:(NSNumber *)value) {
   [self.CPID_decoder regionOfInterestTop:value.intValue];
 }
 
 //public void regionOfInterestWidth(int value)
-RCT_EXPORT_METHOD(regionOfInterestWidth:(nonnull NSNumber *)value) {
+RCT_EXPORT_METHOD(regionOfInterestWidth:(NSNumber *)value) {
   [self.CPID_decoder regionOfInterestWidth:value.intValue];
 }
 
@@ -321,7 +321,7 @@ RCT_EXPORT_METHOD(setContinuousMode:(BOOL) enable) {
 }
 
 //public void setCameraZoom(boolean enable, float zoom)
-RCT_EXPORT_METHOD(setCameraZoom:(BOOL)value zommValue:(nonnull NSNumber *)zoom) {
+RCT_EXPORT_METHOD(setCameraZoom:(BOOL)value zommValue:(NSNumber *)zoom) {
   [self.CPID_decoder setCameraZoom:value cameraZoom:zoom];
 }
 
@@ -331,7 +331,7 @@ RCT_EXPORT_METHOD(setDecoderResolution:(NSString *)value) {
 }
 
 //public void setDecoderToleranceLevel(int value)
-RCT_EXPORT_METHOD(setDecoderToleranceLevel:(nonnull NSNumber *)value) {
+RCT_EXPORT_METHOD(setDecoderToleranceLevel:(NSNumber *)value) {
   [self.CPID_decoder setDecoderToleranceLevel:value.intValue];
 }
 
@@ -347,13 +347,13 @@ RCT_EXPORT_METHOD(setExactlyNBarcodes:(BOOL)enable) {
 
 //public void setExposureSensitivity(String iso)
 RCT_EXPORT_METHOD(setExposureSensitivity:(NSString *)iso) {
-  char isoChar = [iso UTF8String];
+  char isoChar = (char)[iso UTF8String];
   NSNumber *isoValue = [[NSNumber alloc]initWithChar:isoChar];
   [self.CPID_decoder setExposureSensitivity:isoValue];
 }
 
 //public void setFixedExposureTime(int value)
-RCT_EXPORT_METHOD(setFixedExposureTime:(nonnull NSNumber *)value) {
+RCT_EXPORT_METHOD(setFixedExposureTime:(NSNumber *)value) {
   [self.CPID_decoder setExposureTime:value];
 }
 
@@ -363,12 +363,12 @@ RCT_EXPORT_METHOD(setFocus:(NSString *)focus) {
 }
 
 //public void setFocusDistance(float focus)
-RCT_EXPORT_METHOD(setFocusDistance:(nonnull NSNumber *)focus) {
+RCT_EXPORT_METHOD(setFocusDistance:(NSNumber *)focus) {
   [self.CPID_decoder setFocusDistance:focus];
 }
 
 //public void setNumberOfBarcodesToDecode(int number)
-RCT_EXPORT_METHOD(setNumberOfBarcodesToDecode:(nonnull NSNumber *)number) {
+RCT_EXPORT_METHOD(setNumberOfBarcodesToDecode:(NSNumber *)number) {
   [self.CPID_decoder setNumberOfBarcodesToDecode:number.intValue];
 }
 

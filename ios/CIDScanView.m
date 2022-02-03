@@ -1,16 +1,25 @@
 #import "React/RCTViewManager.h"
-#import "CIDScanView.h"
+#import "SimpleScanner.h"
+#import "CIDScanPreview.h"
 
-@interface RNCIDScanView: RCTViewManager
+@interface RNCIDScanView: RCTViewManager<CIDScanPreviewListener>
 @end
 
 @implementation RNCIDScanView
 
 RCT_EXPORT_MODULE()
+RCT_EXPORT_VIEW_PROPERTY(onPreviewReady, RCTDirectEventBlock)
 
 -(UIView *)view {
-    CIDScanView * scview = [CIDScanView getSharedObject: [[UIScreen mainScreen] bounds]];
-    [scview startScanner];
-    return scview;
+    CIDScanPreview *scnview = [[CIDScanPreview alloc]initWithDelegate:self];
+    return scnview;
 }
+
+- (void)previewReady:(CIDScanPreview *)preview {
+  if (!preview.onPreviewReady) {
+    return;
+  }
+    preview.onPreviewReady(nil);
+}
+
 @end

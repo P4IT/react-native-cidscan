@@ -14,7 +14,7 @@
 @property (nonatomic, strong)UIView * _Nonnull rootView;
 
 //-(_Nonnull instancetype)initWithUIview:(UIView * _Nonnull)rootView;
--(instancetype)initWithUIview:(UIView*)rootView resultBlock:(void (^ _Nonnull)(BOOL result))resultBlock;
+-(instancetype _Nullable )initWithUIview:(UIView*_Nullable)rootView resultBlock:(void (^ _Nonnull)(BOOL result))resultBlock;
 
 #pragma mark - License
 
