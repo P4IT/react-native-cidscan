@@ -237,7 +237,7 @@ RCT_EXPORT_METHOD(getSupportedWhiteBalance:(RCTResponseSenderBlock)callback) {
 //public void getZoomRatios(Callback success)
 RCT_EXPORT_METHOD(getZoomRatios:(RCTResponseSenderBlock)callback) {
   NSArray *result = [self.CPID_decoder getZoomRatios];
-  callback(@[[NSNull null], result]);
+    callback(@[[NSNull null], @{@"result": result}]);
 }
 
 //public void hasTorch(Callback success)
