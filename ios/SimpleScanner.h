@@ -3,7 +3,7 @@
 //  iOS-CaptureID-Library
 //
 //  Created by Uwe Hoppe on 14.09.21.
-//  Copyright © 2022 P4IT GmbH & Co. KG All rights reserved.
+//  Copyright © 2021 Christian Jung. All rights reserved.
 //
 
 #ifndef SimpleScanner_h
@@ -21,6 +21,7 @@
 
 -(void) startDecode;
 -(void) startScanner:(id<SimpleScannerEventListener>_Nullable)listener;
+-(void) stopScanner;
 
 @end
 #endif /* SimpleScanner_h */

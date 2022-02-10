@@ -14,7 +14,11 @@
 @property (nonatomic, strong)UIView * _Nonnull rootView;
 
 //-(_Nonnull instancetype)initWithUIview:(UIView * _Nonnull)rootView;
--(instancetype _Nullable )initWithUIview:(UIView*_Nullable)rootView resultBlock:(void (^ _Nonnull)(BOOL result))resultBlock;
+-(instancetype _Nullable )initWithUIview:(UIView * _Nonnull)rootView resultBlock:(void (^_Nullable)(NSArray *_Nullable))resultBlock;
+
+-(instancetype _Nullable )initWithUIview:(UIViewController * _Nonnull)rootView;
+
+-(void)initialize:(UIViewController*_Nullable)rootView resultBlock:(void (^ _Nonnull)(BOOL result))resultBlock;
 
 #pragma mark - License
 
@@ -22,6 +26,11 @@
  @discussion Show the App settings, this function is used by the developer, if the camera-permission is not granted.
  */
 -(void) showAppSettings;
+
+/*!
+ @discussion Show the App settings, this function is used by the developer, if the camera-permission is not granted.
+ */
+-(void) showARWebOverlay:(NSString*)url content:(NSString*)content;
 
 /*!
  @discussion Activate the CortexDecoderLicense in CortexDecoder we need to check the Preferences for the Key.
@@ -647,7 +656,7 @@ function
  @return NSMutableDictionary Objectvalues
  */
 -(NSMutableDictionary * _Nonnull) parsePreferences:(NSArray * _Nonnull)data;
-
-
+-(void) setConfiguration:(NSDictionary * _Nullable)config;
+-(void) configureScanner:(void (^_Nonnull)(NSArray *_Nonnull))decodingBlock;
 
 @end
