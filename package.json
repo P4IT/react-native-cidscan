@@ -1,6 +1,6 @@
 {
   "name": "react-native-cidscan",
-  "version": "1.1.10",
+  "version": "1.1.11",
   "description": "React Native CaptureID Plugin",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
