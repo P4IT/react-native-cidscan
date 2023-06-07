@@ -21,6 +21,7 @@
 -(void)initialize {
     self.scanner = [SimpleScanner getSharedObject:[[UIScreen mainScreen] bounds]];
     [self addSubview:self.scanner];
+    [self.scanner startScanner:self];
 }
 
 - (void)setOnPreviewReady:(RCTDirectEventBlock)onPreviewReady {
